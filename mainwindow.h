@@ -2,11 +2,17 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <QTime>
+#include "lyrices.h"
+#include "lyricswidget.h"
+#include <QToolButton>
 
 class QPushButton;
 class QMediaPlayer;
 class QAudioOutput;
 class QListWidget;
+class QSlider;
+class QLabel;
 class QPropertyAnimation;
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -40,10 +46,21 @@ private:
     QPushButton*play;
     qint64 lastClickTime = 0;
     QPushButton*list;
+    QSlider*slider;
+    qint64 totalPosition;
+    QTime all;
+    Lyrics lyrics;
+    QString lyricsName;
+    LyricsWidget*lyricsWidget;
+    QMap<int,QString>lyricsMap;
+    QPushButton *volume;
+    QLabel*process;
+    QSlider *sliderForVolume;
 protected:
 void resizeEvent(QResizeEvent *event)override;
 void showEvent(QShowEvent *event)override;
 bool eventFilter(QObject *obj, QEvent *event) override;
+
 
 
 private:
@@ -54,6 +71,16 @@ private:
     void connections();
     void loadMusic(const QString &path);
     void onList(QPushButton*btn);
+    void sliderFunc();
+    void updateLyrics(qint64 position);
+    void change(int nextRow);
+    void volumeFunc();
+    void mouseMoveEvent(QMouseEvent *event)override;
 
+
+
+    // QWidget interface
+protected:
+    void mousePressEvent(QMouseEvent *event);
 };
 #endif // MAINWINDOW_H

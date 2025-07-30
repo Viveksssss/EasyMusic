@@ -9,5 +9,7 @@
         <file>resource/background.png</file>
         <file>resource/pause.png</file>
         <file>resource/circle.png</file>
+        <file>resource/noVolume.png</file>
+        <file>resource/volume.png</file>
     </qresource>
 </RCC>
